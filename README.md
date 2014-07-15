@@ -11,3 +11,12 @@ from the snippets in the top level. You need to:
 	git add generated
 
 and then commit.
+
+
+To use these scripts in a Jenkins worker init-script, use code like:
+
+#!/bin/bash
+set -o pipefail
+if ! curl -L -s --fail 'https://github.com/2ndQuadrant/jenkins-worker-scripts/blob/master/generated/amazonlinux201209_jenkins_instancesetup.sh' | bash; then 
+  echo "Setup script failed"
+fi
