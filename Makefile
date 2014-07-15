@@ -1,4 +1,4 @@
-all: generated/amazonlinux201209_jenkins_instancesetup.sh generated/debian6_jenkins_instancesetup.sh generated/packaging-rpm.sh generated/rhel_jenkins_intancesetup.sh
+all: generated/amazonlinux201209_jenkins_instancesetup.sh generated/debian_jenkins_instancesetup.sh generated/packaging-rpm.sh generated/rhel_jenkins_intancesetup.sh
 
 generated/%.sh: %.sh common.sh
 	mkdir -p generated
