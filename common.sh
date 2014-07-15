@@ -10,7 +10,9 @@
 if test -e mirror-git.postgresql.org-postgresql.git ; then
   sudo git --git-dir mirror-git.postgresql.org-postgresql.git fetch
 else
+  echo "Cloning a PostgreSQL mirror as a --reference"
   git clone --quiet --mirror --bare "git://10.0.0.250/git/mirror-git.postgresql.org-postgresql.git"
+  echo "Done cloning"
 fi
 
 #----- END common.sh -----#
