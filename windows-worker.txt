@@ -1,0 +1,51 @@
+JENKINS WINDOWS WORKER
+======================
+
+Spawn a win2k8 r2 x64 instance on the vpc private subnet with the jenkins
+ssh key. During instance creation set a larger than default root size, say
+50GB. You'll need it.
+
+Decrypt the default windows  password using the EC2 console and jenkins
+private key.
+
+Ssh into the jenkins master with an ssh tunnel to the slave's private IP
+on port 3389.
+
+Connect to the local end with rdesktop or Remote Desktop Client, eg localhost:3399 if you used ssh -L 3399:10.0.1.x:3389 ...
+
+Log in as Administrator with the password you decrypted.
+
+Open Control panel, search for internet options. In the security tab, 
+disable Internet Explorer Protected Mode. Otherwise you won't be able
+to get anything done, and this box is a dev workstation not a server.
+
+
+Download: 
+* ActiveState TCL x64 and x86
+* ActiveState Perl x86 and x64
+* Python.org python 2.7 x86 and x64
+* mingw-get-inst
+* git from git-scm.org
+* 7-zip
+
+
+Install:
+
+* .NET runtime 4 if not already installed
+
+* MinGW to C:\MinGW
+  Install the C++ compiler and "MinGW developer toolkit" on top of the defaults
+
+* Microsoft Windows SDK 7.1  to default location.
+  I used GRMSDKX_EN_DVD.iso from http://www.microsoft.com/en-us/download/details.aspx?id=8442 rather than the web installer.
+
+* ActivePerl x86 to c:\Perl . Do not add it to PATH.
+* ActivePerl x64 to C:\Perl64 . Add it to PATH when prompted.
+* ActiveTCL x86 to c:\TCL_x86 . Don't add to PATH.
+* ActiveTCL x64 to c:\TCL_x64 . Don't add to PATH.
+* Python 2.7 x86 to c:\Python27_x86 . Don't add to PATH.
+* Python 2.7 x64 to c:\Python27_x64. Don't add to PATH.
+
+
+
+
