@@ -19,8 +19,3 @@ apt-get -q -y upgrade
 apt-get -q -y install openjdk-6-jre-headless
 apt-get -q -y build-dep postgresql
 apt-get -q -y install libreadline6-dev git
-
-# Work around for Jenkins bug https://issues.jenkins-ci.org/browse/JENKINS-16027
-JENKINS_WORKDIR=/var/cache/jenkins
-mkdir $JENKINS_WORKDIR
-chown admin $JENKINS_WORKDIR
