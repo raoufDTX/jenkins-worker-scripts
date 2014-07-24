@@ -30,9 +30,23 @@ yum -y groupinstall "Development tools"
 yum -y install m4 zlib-devel libxml2-devel perl-ExtUtils-MakeMaker perl-Test-Harness perl-devel perl-ExtUtils-ParseXS libsepol-devel libselinux-devel python26-devel libcom_err-devel libgpg-error-devel libgcrypt-devel ncurses-devel keyutils-libs-devel krb5-devel openssl-devel readline-devel openldap-devel uuid-devel gettext libxslt-devel python-devel tcl-devel glibc-devel perl-ExtUtils-Embed bison flex systemtap-sdt-devel pam-devel
 #----- BEGIN common.sh -----#
 
-env > /tmp/environ
-
+# These should be injected by the EC2 plugin, but aren't.
+# See https://issues.jenkins-ci.org/browse/JENKINS-23864
+#
 JENKINS_PRIVATE_IP=10.0.0.250
+JENKINS_REMOTE_FS_ROOT=/var/cache/jenkins
+
+# Remote FS root should be created by EC2 plugin, but isn't.
+# See https://issues.jenkins-ci.org/browse/JENKINS-16027
+
+mkdir -p $JENKINS_REMOTE_FS_ROOT
+if id ec2-user >& /dev/null ; then
+    chown -R ec2-user $JENKINS_REMOTE_FS_ROOT
+elif id admin &> /dev/null; then
+    chown -R admin $JENKINS_REMOTE_FS_ROOT
+else
+    echo "WARNING: Don't know what owner to give to $JENKINS_REMOTE_FS_ROOT"
+fi
 
 # Override DNS by adding a hosts entry for qa.2ndquadrant.com that points to
 # its EC2 private IP for within VPC. Because our DNS is at 1and1 we don't have
@@ -51,7 +65,10 @@ fi
 if test -e mirror-git.postgresql.org-postgresql.git ; then
   # Refresh on node restart
   echo "Updating the --reference PostgreSQL mirror"
-  sudo git --git-dir mirror-git.postgresql.org-postgresql.git fetch
+  # We used to sudo git fetch here, so reset permissions
+  sudo chown -R $(id -un) mirror-git.postgresql.org-postgresql.git
+  # then update
+  git --git-dir mirror-git.postgresql.org-postgresql.git fetch
 else
   # Clone on first start
   echo "Cloning a PostgreSQL mirror as a --reference"
