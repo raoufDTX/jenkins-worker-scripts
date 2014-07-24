@@ -18,7 +18,7 @@ apt-get -q -y dist-upgrade
 apt-get -q -y upgrade
 apt-get -q -y install openjdk-6-jre-headless
 apt-get -q -y build-dep postgresql
-apt-get -q -y install libreadline6-dev git
+apt-get -q -y install libreadline6-dev git curl
 #----- BEGIN common.sh -----#
 
 # These should be injected by the EC2 plugin, but aren't.
