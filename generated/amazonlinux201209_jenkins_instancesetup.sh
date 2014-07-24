@@ -33,7 +33,7 @@ yum -y install m4 zlib-devel libxml2-devel perl-ExtUtils-MakeMaker perl-Test-Har
 # These should be injected by the EC2 plugin, but aren't.
 # See https://issues.jenkins-ci.org/browse/JENKINS-23864
 #
-JENKINS_PRIVATE_IP=10.0.0.250
+JENKINS_PRIVATE_IP=10.0.0.133
 JENKINS_REMOTE_FS_ROOT=/var/cache/jenkins
 
 # Remote FS root should be created by EC2 plugin, but isn't.
