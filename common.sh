@@ -66,9 +66,6 @@ fi
 if test -e mirror-git.postgresql.org-postgresql.git ; then
   # Refresh on node restart
   echo "Updating the --reference PostgreSQL mirror"
-  # We used to sudo git fetch here, so reset permissions
-  sudo chown -R $(id -un) mirror-git.postgresql.org-postgresql.git
-  # then update
   git --git-dir mirror-git.postgresql.org-postgresql.git fetch
 else
   # Clone on first start
